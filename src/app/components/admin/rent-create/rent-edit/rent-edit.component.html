@@ -1,0 +1,70 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Editar Livros</mat-card-title>
+    <mat-card-subtitle>Modifique os dados de livro, autor e gênero.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <br />
+
+    <app-messages [texto]="mensagem" />
+    <br />
+
+    <div>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+        <input type="hidden" formControlName="rentBookId" />
+
+        <div class="grid-container">
+          <mat-form-field class="grid-item">
+            <input
+              matInput
+              placeholder="Código do Livro:"
+              formControlName="bookId"
+            />
+            <mat-error *ngIf="form.bookId.touched && form.bookId.invalid">
+              <span *ngIf="form.bookId.errors.required">
+                Por favor, informe o código do livro.
+              </span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="grid-item">
+            <input
+              type="text"
+              matInput
+              placeholder="Código do Cliente:"
+              formControlName="customerId"
+            />
+            <mat-error *ngIf="form.customerId.touched && form.customerId.invalid">
+              <span *ngIf="form.customerId.errors.required">
+                Por favor, informe o código do cliente.
+              </span>
+            </mat-error>
+          </mat-form-field>          
+          <mat-form-field class="grid-item">
+            <mat-label>Status:</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="">Escolha uma opção</mat-option>
+              <mat-option [value]="1">Disponível</mat-option>
+              <mat-option [value]="2">Emprestado</mat-option>
+              <mat-option [value]="3">Excluído</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.status.touched && form.status.invalid">
+              <span *ngIf="form.status.errors.required">
+                Por favor, selecione o status.
+              </span>
+            </mat-error>
+          </mat-form-field>
+          <button
+            mat-raised-button
+            class="grid-item"
+            color="primary"
+            type="submit"
+            [disabled]="!editForm.valid"
+          >
+            Salvar Alterações
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

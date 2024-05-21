@@ -1,0 +1,72 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Editar Livros</mat-card-title>
+    <mat-card-subtitle>Modifique os dados de livro, autor e gênero.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <br />
+
+    <app-messages [texto]="mensagem" />
+    <br />
+
+    <div>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+        <input type="hidden" formControlName="id" />
+
+        <div class="grid-container">
+          <mat-form-field class="grid-item">
+            <input
+              matInput
+              placeholder="Nome do livro:"
+              formControlName="name"
+            />
+            <mat-error *ngIf="form.name.touched && form.name.invalid">
+              <span *ngIf="form.name.errors.required">
+                Por favor, informe o nome do livro.
+              </span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="grid-item">
+            <input
+              type="text"
+              matInput
+              placeholder="Autor:"
+              formControlName="author"
+            />
+            <mat-error *ngIf="form.author.touched && form.author.invalid">
+              <span *ngIf="form.author.errors.required">
+                Por favor, informe o nome do autor.
+              </span>
+            </mat-error>
+          </mat-form-field>          
+          <mat-form-field class="grid-item">
+            <mat-label>Gênero:</mat-label>
+            <mat-select formControlName="genre">
+              <mat-option value="">Escolha uma opção</mat-option>
+              <mat-option [value]="1">Fantasia</mat-option>
+              <mat-option [value]="2">Autoajuda</mat-option>
+              <mat-option [value]="3">Terror</mat-option>
+              <mat-option [value]="4">Viagem</mat-option>
+              <mat-option [value]="5">Romance</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.tipo.touched && form.tipo.invalid">
+              <span *ngIf="form.tipo.errors.required">
+                Por favor, selecione o gênero.
+              </span>
+            </mat-error>
+          </mat-form-field>
+          <button
+            mat-raised-button
+            class="grid-item"
+            color="primary"
+            type="submit"
+            [disabled]="!editForm.valid"
+          >
+            Salvar Alterações
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,108 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Locação de Livros</mat-card-title>
+    <mat-card-subtitle>Pesquisa de locação de livros por ID do cliente e/ou ID do livro</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+   
+    <!-- mensagem -->
+    <app-messages [texto]="mensagem"/>
+    <br/>
+
+    <form [formGroup]="listForm" (ngSubmit)="onSubmit()">
+      <div class="grid-container">
+        <mat-form-field class="grid-item">
+          <input
+            type="text"
+            matInput
+            placeholder="ID do Cliente"
+            formControlName="customerId"
+          />
+        </mat-form-field>
+        <mat-form-field class="grid-item">
+          <input
+            type="text"
+            matInput
+            placeholder="ID do Livro"
+            formControlName="bookId"
+          />
+        </mat-form-field>
+        
+        <button
+          mat-raised-button
+          class="grid-item button"
+          color="primary"
+          type="submit"
+          [disabled]="!listForm.valid"
+        >
+          CONSULTAR
+        </button>
+      </div>
+    </form>
+
+    <div>
+
+      <mat-table [dataSource]="dataTable" class="tabela-contas">
+        <!-- coluna 'data' -->
+        <ng-container matColumnDef="rentBookId">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>ID</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            {{ item.rentBookId }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="customerId">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>ID do Cliente</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            {{ item.customerId }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="bookId">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>ID do Livro</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            {{ item.bookId }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>Status</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            {{ item.status }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="operacoes">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>Operações</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            <button
+              mat-raised-button
+              color="primary"
+              [routerLink]="['livros/locacao-de-livros/edit/', item.rentBookId]"
+            >
+              Editar
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: colunas"></mat-row>
+      </mat-table>
+
+      <p>
+        Quantidade de registros obtidos: {{dataTable.data.length}}
+      </p>
+
+    </div>
+  </mat-card-content>
+</mat-card>

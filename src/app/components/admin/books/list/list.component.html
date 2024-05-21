@@ -1,0 +1,148 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Consulta de Livros</mat-card-title>
+    <mat-card-subtitle>Pesquisa de livro por ID, Nome, Autor ou Gênero. <em>Preencha um ou mais campos.</em></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+   
+    <!-- mensagem -->
+    <app-messages [texto]="mensagem"/>
+    <br/>
+
+    <form [formGroup]="listForm" (ngSubmit)="onSubmit()">
+      <div class="grid-container">
+        <mat-form-field class="grid-item">
+          <input
+            type="text"
+            matInput
+            placeholder="ID do Livro"
+            formControlName="id"
+          />
+        </mat-form-field>
+        <mat-form-field class="grid-item">
+          <input
+            type="text"
+            matInput
+            placeholder="Nome do Livro"
+            formControlName="name"
+          />          
+        </mat-form-field>
+        <mat-form-field class="grid-item">
+          <input
+            type="text"
+            matInput
+            placeholder="Autor"
+            formControlName="author"
+          />
+        </mat-form-field>
+        <mat-form-field class="grid-item">
+          <input
+            type="text"
+            matInput
+            placeholder="Gênero"
+            formControlName="genre"
+          />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          class="grid-item button"
+          color="primary"
+          type="submit"
+          [disabled]="!listForm.valid"
+        >
+          CONSULTAR
+        </button>
+      </div>
+    </form>
+
+    <div>
+
+      <mat-table [dataSource]="dataTable" class="tabela-contas">
+        <!-- coluna 'data' -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>ID</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            {{ item.id }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="livro">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>Livro</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            {{ item.livro }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="autor">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>Autor</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            {{ item.autor }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="genero">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>Gênero</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            {{ item.genero }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="autor">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>Tipo</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            {{ item.tipo == 1 ? 'Conta a receber' : 'Conta a pagar' }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="categoria">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>Categoria</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            {{ item.categoria | uppercase }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>Nome da conta</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">{{ item.nome }}</mat-cell>
+        </ng-container> -->
+
+        <ng-container matColumnDef="operacoes">
+          <mat-header-cell *matHeaderCellDef
+            ><strong>Operações</strong></mat-header-cell
+          >
+          <mat-cell *matCellDef="let item">
+            <button
+              mat-raised-button
+              color="primary"
+              [routerLink]="['/admin/edit', item.id]"
+            >
+              Editar
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: colunas"></mat-row>
+      </mat-table>
+
+      <p>
+        Quantidade de registros obtidos: {{dataTable.data.length}}
+      </p>
+
+    </div>
+  </mat-card-content>
+</mat-card>

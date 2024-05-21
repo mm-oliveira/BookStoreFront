@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-card-title> Acesso ao Sistema </mat-card-title>
+  <mat-card-subtitle>
+    Selecione uma opção:
+  </mat-card-subtitle>
+  <mat-card-content>
+    
+    <!-- exibir mensagem -->
+    <app-messages [texto]="resposta"></app-messages>
+
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+      <p><button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [routerLink]="['/livros/consulta-de-livros']"
+        (click)="onClickButton()"
+      >
+          CONSULTAR LIVROS
+        </button> 
+
+        <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [routerLink]="['/livros/cadastro-de-livros']"
+        (click)="onClickButton()"
+      >
+          CADASTRAR LIVRO
+        </button>
+
+        <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [routerLink]="['/livros/nova-locacao-de-livros']"
+        (click)="onClickButton()"
+      >
+          NOVA LOCAÇÃO DE LIVRO
+        </button>
+
+        <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [routerLink]="['/livros/lista-de-locacao-de-livros']"
+        (click)="onClickButton()"
+      >
+          CONSULTAR LOCAÇÃO DE LIVRO
+        </button>
+
+        <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [routerLink]="['/clientes/consulta-de-clientes']"
+        (click)="onClickButton()"
+      >
+          CONSULTAR CLIENTES
+        </button>
+
+        <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [routerLink]="['/clientes/cadastro-de-clientes']"
+        (click)="onClickButton()"
+      >
+         CADASTRAR CLIENTE
+        </button>
+      </p>
+        
+    </form>
+  </mat-card-content>
+</mat-card>

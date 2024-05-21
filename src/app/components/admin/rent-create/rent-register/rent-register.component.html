@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Nova Locação de Livro</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <!-- exibir mensagem -->
+    <app-messages [texto]="resposta"></app-messages>
+
+    <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+      <div class="grid-container">
+        <mat-form-field class="grid-item">
+          <mat-label>Código do Cliente:</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Código do Cliente"
+            formControlName="customerId"
+          />
+          <mat-error *ngIf="form.customerId.touched && form.customerId.invalid">
+            <span *ngIf="form.customerId.errors.required">
+              Por favor, informe o código do cliente.
+            </span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="grid-item">
+          <mat-label>Código do Livro:</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Código do Livro"
+            formControlName="bookId"
+          />
+          <mat-error *ngIf="form.bookId.touched && form.bookId.invalid">
+            <span *ngIf="form.phone.errors.required">
+              Por favor, informe o código do livro.
+            </span>
+          </mat-error>
+        </mat-form-field>
+        <br>
+          <button
+            mat-raised-button
+            class="grid-item"
+            color="primary"
+            type="submit"
+            [disabled]="!formRegister.valid"
+          >
+            CADASTRAR
+          </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,115 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Cadastro de Cliente</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <!-- exibir mensagem -->
+    <app-messages [texto]="resposta"></app-messages>
+
+    <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+      <div class="grid-container">
+        <mat-form-field class="grid-item">
+          <mat-label>Nome:</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Nome do cliente"
+            formControlName="name"
+          />
+          <mat-error *ngIf="form.name.touched && form.name.invalid">
+            <span *ngIf="form.name.errors.required">
+              Por favor, informe o nome do cliente.
+            </span>
+            <span *ngIf="form.nome.errors.minlength">
+              Por favor, informe no mínimo 8 caracteres.
+            </span>
+            <span *ngIf="form.nome.errors.maxlength">
+              Por favor, informe no máximo 100 caracteres.
+            </span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="grid-item">
+          <mat-label>Telefone:</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Telefone"
+            formControlName="phone"
+          />
+          <mat-error *ngIf="form.phone.touched && form.phone.invalid">
+            <span *ngIf="form.phone.errors.required">
+              Por favor, informe o telefone do cliente.
+            </span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email:</mat-label>
+          <input
+            matInput
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+          />
+          <mat-error *ngIf="form.email.touched && form.email.invalid">
+            <span *ngIf="form.email.errors.required">
+              Por favor, informe o email do cliente.
+            </span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Endereço:</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Endereço"
+            formControlName="address"
+          />
+          <mat-error *ngIf="form.address.touched && form.address.invalid">
+            <span *ngIf="form.address.errors.required">
+              Por favor, informe o endereço do cliente.
+            </span>
+          </mat-error>
+        </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tipo de Documento:</mat-label>
+        <mat-select formControlName="documentType">
+          <mat-option value="">Escolha uma opção</mat-option>
+          <mat-option [value]="1">RG</mat-option>
+          <mat-option [value]="2">CPF</mat-option>
+          <mat-option [value]="3">CNH</mat-option>
+          <mat-option [value]="4">CNPJ</mat-option>
+        </mat-select>        
+        <mat-error *ngIf="form.documentType.touched && form.documentType.invalid">
+          <span *ngIf="form.documentType.errors.required">
+            Por favor, informe o tipo do documento.
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nº de Documento:</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Número do Documento"
+          formControlName="documentNumber"
+        />
+        <mat-error *ngIf="form.documentNumber.touched && form.documentNumber.invalid">
+          <span *ngIf="form.documentNumber.errors.required">
+            Por favor, informe o número do documento.
+          </span>
+        </mat-error>
+      </mat-form-field>
+          <button
+            mat-raised-button
+            class="grid-item"
+            color="primary"
+            type="submit"
+            [disabled]="!formRegister.valid"
+          >
+            CADASTRAR
+          </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
